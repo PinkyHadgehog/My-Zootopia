@@ -12,36 +12,32 @@ animals_data = load_data("animals_data.json")
 
 
 # 3. HTML-String erzeugen
-animals_html = ""
-
-for animal in animals_data:
+def serialize_animal(animal):
     name = animal["name"]
     diet = animal["characteristics"].get("diet", "Unknown")
-    animal_type = animal["characteristics"].get("type", "Unknown") #wenn type existiert, verwende ihn, wenn nicht, dann verwende "unknown"
+    animal_type = animal["characteristics"].get("type", "Unknown")
+
     if animal["locations"]:
         location = animal["locations"][0]
     else:
         location = "Unknown"
 
-    animals_html += f"""
+    return f"""
     <li class="cards__item">
         <div class="card__title">{name}</div>
         <p class="card__text">
             <strong>Diet:</strong> {diet}<br/>
-            <strong>Type:</strong> {animal_type}<br/>
             <strong>Location:</strong> {location}<br/>
+            <strong>Type:</strong> {animal_type}<br/>
         </p>
     </li>
     """
 
-"""
-animals_html += "<li class='cards__item'>"
-animals_html += f"Name: {name}<br/>"
-animals_html += f"Diet: {diet}<br/>"
-animals_html += f"Type: {animal_type}<br/>"
-animals_html += f"Location: {location}<br/>"
-animals_html += "</li>"
-"""
+animals_html = ""
+
+for animal in animals_data:
+        animals_html += serialize_animal(animal)
+
 
 # 4. Template einlesen
 with open("animals_template.html", "r") as file:
