@@ -25,10 +25,12 @@ for animal in animals_data:
 
     animals_html += f"""
     <li class="cards__item">
-        Name: {name}<br/>
-        Diet: {diet}<br/>
-        Type: {animal_type}<br/>
-        Location: {location}<br/>
+        <div class="card__title">{name}</div>
+        <p class="card__text">
+            <strong>Diet:</strong> {diet}<br/>
+            <strong>Type:</strong> {animal_type}<br/>
+            <strong>Location:</strong> {location}<br/>
+        </p>
     </li>
     """
 
