@@ -25,12 +25,21 @@ for animal in animals_data:
 
     animals_html += f"""
     <li class="cards__item">
-        <div class="card__title">{name}</div>
-        <p>Diet: {diet}</p>
-        <p>Type: {animal_type}</p>
-        <p>Location: {location}</p>
+        Name: {name}<br/>
+        Diet: {diet}<br/>
+        Type: {animal_type}<br/>
+        Location: {location}<br/>
     </li>
     """
+
+"""
+animals_html += "<li class='cards__item'>"
+animals_html += f"Name: {name}<br/>"
+animals_html += f"Diet: {diet}<br/>"
+animals_html += f"Type: {animal_type}<br/>"
+animals_html += f"Location: {location}<br/>"
+animals_html += "</li>"
+"""
 
 # 4. Template einlesen
 with open("animals_template.html", "r") as file:
