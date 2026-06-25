@@ -16,6 +16,7 @@ def serialize_animal(animal):
     name = animal["name"]
     diet = animal["characteristics"].get("diet", "Unknown")
     animal_type = animal["characteristics"].get("type", "Unknown")
+    slogan = animal["characteristics"].get("slogan", "No slogan available")
 
     if animal["locations"]:
         location = animal["locations"][0]
@@ -29,6 +30,7 @@ def serialize_animal(animal):
             <strong>Diet:</strong> {diet}<br/>
             <strong>Location:</strong> {location}<br/>
             <strong>Type:</strong> {animal_type}<br/>
+            <strong>Slogan:</strong> {slogan}<br/>
         </p>
     </li>
     """
