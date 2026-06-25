@@ -1,26 +1,46 @@
 import json
 
+#1. Funktion definieren
 def load_data(file_path):
   """ Loads a JSON file """
   with open(file_path, "r") as handle:
     return json.load(handle)
 
+
+# 2. JSON laden
 animals_data = load_data("animals_data.json")
 
+
+# 3. HTML-String erzeugen
+animals_html = ""
+
 for animal in animals_data:
-    if "name" in animal:
-        print(f"Name: {animal["name"]}")
+    name = animal["name"]
+    diet = animal["characteristics"].get("diet", "Unknown")
+    animal_type = animal["characteristics"].get("type", "Unknown") #wenn type existiert, verwende ihn, wenn nicht, dann verwende "unknown"
+    if animal["locations"]:
+        location = animal["locations"][0]
+    else:
+        location = "Unknown"
 
-    if "characteristics" in animal:
-        characteristics = animal["characteristics"]
+    animals_html += f"""
+    <li class="cards__item">
+        <div class="card__title">{name}</div>
+        <p>Diet: {diet}</p>
+        <p>Type: {animal_type}</p>
+        <p>Location: {location}</p>
+    </li>
+    """
 
-        if "diet" in characteristics:
-            print(f"Diet: {characteristics["diet"]}")
+# 4. Template einlesen
+with open("animals_template.html", "r") as file:
+    html = file.read()
 
-        if "type" in characteristics:
-            print(f"Type: {characteristics["type"]}")
 
-    if "locations" in animal and len(animal["locations"]) > 0:
-        print(f"Location: {animal["locations"][0]}")
+# 5. Platzhalter ersetzen
+html = html.replace("__REPLACE_ANIMALS_INFO__", animals_html)
 
-print()
+
+# 6. Neue HTML-Datei schreiben
+with open("animals.html", "w") as file:
+    file.write(html)
